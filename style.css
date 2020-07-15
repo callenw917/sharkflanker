@@ -1,1 +1,49 @@
+body,html
+{
+  min-height:100%;
+}
 
+body{
+  background-image: url("seabed.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+
+.container
+{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.google-font{
+  font-family: 'Staatliches', cursive;
+  font-size:4em;
+}
+
+.game_title{
+  color: rgba(255, 194, 134);
+  -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgba(103,103,103);
+}
+
+.start_button{
+  background-color: rgba(255, 194, 134);
+  color: white;
+  border: 40px;
+  text-align: center;
+  position: relative;
+  top: 100px;
+  width: 400px
+}
+
+.button_panel
+{
+
+}
+
+.arrowbutton {
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+}
