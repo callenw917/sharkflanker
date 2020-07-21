@@ -1,49 +1,106 @@
-body,html
-{
-  min-height:100%;
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: visible;
 }
 
-body{
-  background-image: url("seabed.jpg");
-  background-repeat: no-repeat;
-  background-size:cover;
-}
-
-.container
-{
+.container {
   position: relative;
   text-align: center;
   color: white;
 }
 
-.google-font{
+.google-font {
   font-family: 'Staatliches', cursive;
-  font-size:4em;
+  font-size: 4em;
 }
 
-.game_title{
+.game_title {
   color: rgba(255, 194, 134);
   -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: rgba(103,103,103);
+  -webkit-text-stroke-color: rgba(103, 103, 103);
 }
 
-.start_button{
+.pretty_button {
   background-color: rgba(255, 194, 134);
   color: white;
   border: 40px;
   text-align: center;
   position: relative;
+}
+
+.top-buffer {
   top: 100px;
-  width: 400px
 }
 
-.button_panel
-{
-
+.right-buffer {
+  right: 5%;
 }
 
-.arrowbutton {
-  border-radius: 50px;
-  height: 100px;
-  width: 100px;
+.width-1 {
+  width: 30%;
+}
+
+.width-2 {
+  width: 10%;
+}
+
+.in-line {
+  position: relative;
+  top: -100;
+  left: 50;
+}
+
+h2 {
+  line-height: 200%;
+  padding: 8px;
+}
+
+.button_panel {
+  position: absolute;
+  bottom: 7%;
+  display: inline-block;
+  height: 12%;
+  width: 50%;
+  left: 25%;
+  background-color: rgba(153, 217, 234);
+  text-align: center;
+}
+
+.circlebutton {
+  display: inline-block;
+  width: 17%;
+  height: 90%;
+  line-height: 80px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: #f5f5f5;
+  text-align: center;
+  text-decoration: none;
+  background: #ffffff;
+  box-shadow: 0 0 5px gray;
+}
+
+.left {
+  background-image: url("Images/left_arrow.jpg");
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.right {
+  background-image: url("Images/right_arrow.jpg");
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.dolphin-button {
+  background-image: url("Images/dolphin_button2.png");
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 30px;
+  margin-right: 30px;
 }

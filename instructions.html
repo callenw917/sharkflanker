@@ -1,4 +1,4 @@
-<!-- title page-->
+<!-- instructions page-->
 
 <!doctype html>
 <html lang="en">
@@ -9,24 +9,34 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="background.css">
   <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <center>
+    <h1>How to Play</h1>
+    <h2> You and your team are underwater to study sharks. You want to study them by taking pictures of one special shark. In order to do so, you must tell your team which direction the shark is swimming.
+      <br>For example, this shark</h2>
+  </center>
   <div class="container">
-    <t1 class="game_title google-font">
-      Shiver: A Modified Flanker Task</t1>
-    <div>
-      <img src="Images/shark.jpg" alt="shark" width="300">
-    </div>
-    <div>
-      <form action= "instructions.html">
-        <button type="submit" class="btn btn-primary btn-lg google-font pretty_button width-1 top-buffer" name="start_button"> START</button>
-      </form>
-    </div>
+
+    <img src="Images/instruction-1.jpg" alt="shark" width="80%">
   </div>
 
+  <center>
+    <div style="white-space:nowrap">
+      <h2 style="display:inline;">is pointed this way</h2>
+      <img src="Images/left_arrow.jpg" alt="arrow" width="50" style="display=inline">
+    </div>
+    <div style="white-space:nowrap">
+      <h2 style="display:inline">is swimming this way</h2>
+      <img src="Images/left_arrow.jpg" alt="arrow" width="50" style="display=inline">
+    </div>
+  </center>
+  <div align="right">
+    <button type="submit" class="btn btn-primary btn-lg pretty_button right-buffer" width="80" name="audio_button"> listen again</button>
+    <button onclick="Change_Page" class="btn btn-primary btn-lg pretty_button right-buffer" width="80" name="next_button"> next page</button>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
