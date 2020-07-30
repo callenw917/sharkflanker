@@ -14,13 +14,11 @@
 </head>
 
 <body>
-
     <div class="button_panel">
-      <button onlick= "Right_Clicked" type="submit" class="left circlebutton" name="left_arr_button"> </button>
-      <button onclick = "Dolphin_Clicked" type="submit" class="dolphin-button circlebutton" name="left_arr_button"> </button>
-      <button onclick = "Left_Clicked" type="submit" class="right circlebutton" name="left_arr_button"> </button>
+      <button onlick="Right_Clicked" type="submit" class="left circlebutton" name="left_arr_button"> </button>
+      <button onclick="Dolphin_Clicked" type="submit" class="dolphin-button circlebutton" name="left_arr_button"> </button>
+      <button onclick="Left_Clicked" type="submit" class="right circlebutton" name="left_arr_button"> </button>
     </div>
-
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -1,4 +1,4 @@
-<!-- title page-->
+<!-- contains template for button panel (arrow + dolphin buttons)-->
 
 <!doctype html>
 <html lang="en">
@@ -10,33 +10,22 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="background.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 
-
-  <!--Container centering: Title, Shark Image, Start Button-->
 <body>
-  <div class="container">
-    <t1 class="game_title google-font">
-      Shiver: A Modified Flanker Task</t1>
-    <div>
-      <img src="Images/shark.jpg" alt="shark" width="40%">
+  <template id="button_panel_template">
+    <div class="button_panel">
+      <button onlick="Right_Clicked" type="submit" class="left circlebutton" name="left_arr_button"> </button>
+      <button onclick="Dolphin_Clicked" type="submit" class="dolphin-button circlebutton" name="left_arr_button"> </button>
+      <button onclick="Left_Clicked" type="submit" class="right circlebutton" name="left_arr_button"> </button>
     </div>
-    <div>
-      <!--Link to Instructions Page-->
-      <form action= "instructions.html">
-        <button type="submit" class="btn btn-primary btn-lg google-font pretty_button width-1 top-buffer" name="start_button"> START</button>
-      </form>
-    </div>
-  </div>
-
+  </template>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   <script src="main.js"></script>
-  <!-- WebGazer.js library 
-  <script src="webgazer.js" type="text/javascript" > -->
 </body>
 
 </html>

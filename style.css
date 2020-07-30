@@ -1,8 +1,25 @@
+/* Include for:
+    -general button styling
+    -styling for button panel
+    -google fonts
+*/
+
 body, html {
   height: 100%;
   width: 100%;
   margin: 0;
   overflow: visible;
+}
+
+.question-group
+{
+  align-self: center;
+  height:auto;
+  width: 650px;
+
+  border: thin black solid;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .container {
@@ -28,6 +45,7 @@ body, html {
   border: 40px;
   text-align: center;
   position: relative;
+  margin: 20px;
 }
 
 .top-buffer {

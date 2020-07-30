@@ -1,0 +1,161 @@
+<!-- setup to be completed by parent: demographic information, consent for eye-tracking
+-Parent: -name -relation to child
+-Child: -age -medication (Y/N) -Consent -eye-tracking -ATEC
+-->
+
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <title>Modified Flanker Task: setup</title>
+
+    <!--Questions about Parent -->
+    <h4>Questions concerning the parent/guardian:</h4>
+    <form class="question-group">
+      <!--Name of Parent-->
+      <div>
+        <label for="parent_name">Name of person filling out this form</label>
+        <input type="" class="form-control" id="parent_name" placeholder="full name">
+      </div>
+
+      <br>
+
+      <!--Relation of the Parent-->
+      <div id="relation_ques">
+        <label for="relation_form">What is your relation to the participant?</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="relation" id="rel_mother">
+            mother
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="relation" id="rel_father">
+            father
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="relation" id="rel_gparent">
+            grandparent
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="relation" id="rel_sibling">
+            sibling
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="relation" id="rel_other">
+            other
+        </div>
+      </div> <!--end of question div-->
+    </form>
+    <!--end of parent questions form-->
+
+    <br>
+
+    <!--Questions about Child -->
+    <h4>Questions concerning the participant:</h4>
+    <form class="question-group">
+      <div class="form-group row" name="age_question">
+        <label for="age_question">Age of the participant:</label>
+        <input type="" class="form-control" id="child_age" placeholder="ex: 7">
+      </div> <!--end of question div-->
+
+      <div name="gender_question">
+        <label for="gender_question">Gender of the participant:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender_M">
+          male
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="gender_F">
+          female
+        </div>
+      </div> <!--end question div-->
+
+      <div name="school_question">
+        <label for="school_question">Level in school:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_2pre">
+          1st year of Preschool
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_1pre">
+          2nd year of Preschool
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_kinder">
+          Kindergarten
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_1">
+          1st grade
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_2">
+          2nd grade
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_3">
+          3rd grade
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_4">
+          4th grade
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_5">
+          5th grade
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_6">
+          6th grade
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="school" id="school_home">
+          homeschool
+        </div>
+      </div> <!--end question div-->
+
+      <div name="meds_question">
+        <label for="gender_question">Does the participant take medication?</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="meds" id="meds_yes">
+            yes
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="meds" id="meds_no">
+            no
+        </div>
+      </div> <!--end question div-->
+
+      <div name="meds_question">
+        <label for="meds_question">Has the participant taken their medicine?</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="meds_taken" id="meds_taken_Y">
+          yes
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="meds_taken" id="meds_taken_N">
+          no
+        </div>
+      </div> <!--end question div-->
+    </form>
+    <!--end form for child questions-->
+
+<!--Button for next page-->
+    <div align="right">
+    <button onclick="Submit(); this.blur();" type="submit" class="btn btn-primary btn-lg pretty_button right-buffer" name="submit_button">Submit</button>
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+</html>
