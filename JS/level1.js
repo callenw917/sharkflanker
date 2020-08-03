@@ -10,21 +10,42 @@ var seeds = [
     "000",
     "010",
     "001",
+    "010",
+    "011",
+    "000",
+    "010",
+    "001",
+    "000",
+    "010",
+    "100",
     "110",
     "101",
+    "110",
     "111",
+    "100",
+    "110",
+    "101",
+    "100",
+    "110",
+    "200",
+    "210",
     "201",
+    "210",
     "211",
+    "200",
     "210",
     "201",
     "200",
-    "211"
+    "210",
+    
 ]
 
 var startTime;
 var endTime;
 
 var seedCounter = 0;
+
+var userID
 
 window.onload = function()
 {
@@ -82,7 +103,10 @@ window.onload = function()
         }
     };
 
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= 29)
+        generateLevel(seeds[seedCounter++]);
+
+    userID = $('#userID').val();
 }
 
 var orientation;
@@ -136,8 +160,14 @@ function correct()
     //hide old sharks
     sharks[orientation].forEach(hide);
 
+    //Submit Data
+    submitRound(1, timeDiff);
+
+
+
     //generate new sharks
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= 29)
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);
 }
 
 function incorrect()
@@ -149,6 +179,26 @@ function incorrect()
     //hide old sharks
     sharks[orientation].forEach(hide);
 
+    //Submit Data
+    submitRound(0, timeDiff);
+
     //generate new sharks
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= 29)
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+}
+
+function submitRound(correct, timeDiff)
+{
+    $.ajax({
+        url: "/config/submit.php",
+        type: "POST",
+        data: {
+            userID: userID,
+            correct: correct,
+            dolphin: 0,
+            timing: timeDiff,
+            round: seedCounter
+        },
+        cache:false
+    });
 }

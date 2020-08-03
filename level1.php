@@ -1,3 +1,16 @@
+<?php 
+error_reporting(E_ALL); ini_set('display_errors', 1);
+require $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
+include($_SERVER['DOCUMENT_ROOT'].'/Classes/User.php');
+
+// create user - temp code
+$currentUser = new User($connection);
+$id = $currentUser->getID();
+
+?>
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5,6 +18,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="CSS/style.css">
     <script src="JS/level1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -49,5 +63,10 @@
         <button id="left-button" type="button"><</button>
         <button id="right-button" type="button">></button>
     </div>
+
+    <form method="post" id="submitRound">
+        <input type="text" id="userID" name="userID" value="<?php echo $id;?>">
+    </form>
+
 </body>
 </html>
