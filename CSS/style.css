@@ -1,6 +1,9 @@
 body {
     background-image: url("../Images/underwater.jpg");
     background-position: center;
+
+    top:0;
+    left:0;
 }
 
 h1 {
@@ -47,16 +50,54 @@ h1 {
     height: 100%;
     width: 100%;
 
-    display: flex;
-    justify-content: center;
     align-items: center;
     align-content: center;
-    flex-wrap: wrap;
+}
+
+#row1-container{
+  flex-wrap: wrap;
+}
+
+#row2-container{
+  flex-wrap: nowrap;
+}
+
+#row3-container{
+  flex-wrap: nowrap;
 }
 
 .row {
     display: flex;
     justify-content: center;
+}
+
+/*15% between each column*/
+.row1 {
+  top: 20%;
+}
+
+.row2 {
+  top: 35%;
+}
+
+.row3 {
+  top: 50%;
+}
+/* 17% between each column*/
+.col1 {
+  left: 24%;
+}
+
+.col2 {
+  left: 41%;
+}
+
+.col3 {
+  left: 58%;
+}
+
+.absolute{
+  position: absolute;
 }
 
 #buttons {
