@@ -1,11 +1,7 @@
-<?php 
+<?php
+session_start(); 
 error_reporting(E_ALL); ini_set('display_errors', 1);
-require $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
-include($_SERVER['DOCUMENT_ROOT'].'/Classes/User.php');
-
-// create user - temp code
-$currentUser = new User($connection);
-$id = $currentUser->getID();
+$id = $_SESSION['userID'];
 
 ?>
 
