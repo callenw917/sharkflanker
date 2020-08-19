@@ -6,6 +6,7 @@ var sharks = [];
 var leftButton;
 var rightButton;
 
+var numRounds = 30;
 var seeds = [
     "000",
     "010",
@@ -49,6 +50,8 @@ var userID
 
 window.onload = function()
 {
+    console.log($.ajax);
+
     verticalSharks[0] = document.getElementById("shark2");
     verticalSharks[1] = document.getElementById("shark0");
     verticalSharks[2] = document.getElementById("shark1");
@@ -103,7 +106,7 @@ window.onload = function()
         }
     };
 
-    if (seedCounter <= 29)
+    if (seedCounter <= numRounds -1)
         generateLevel(seeds[seedCounter++]);
 
     userID = $('#userID').val();
@@ -115,6 +118,7 @@ var innerDirection;
 
 function generateLevel(seed)
 {
+    console.log(seedCounter);
     orientation = seed.charAt(0);
     outerDirection = seed.charAt(1);
     innerDirection = seed.charAt(2);
@@ -166,8 +170,14 @@ function correct()
 
 
     //generate new sharks
-    if (seedCounter <= 29)
+    if (seedCounter <= numRounds - 1)
+    {
         window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);
+    }
+    else
+    {
+        window.location.href = 'feedback.php';
+    }
 }
 
 function incorrect()
@@ -183,8 +193,14 @@ function incorrect()
     submitRound(0, timeDiff);
 
     //generate new sharks
-    if (seedCounter <= 29)
+    if (seedCounter <= numRounds -1)
+    {
         window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+    }
+    else
+    {
+        window.location.href = 'feedback.php';
+    }
 }
 
 function submitRound(correct, timeDiff)
@@ -193,6 +209,7 @@ function submitRound(correct, timeDiff)
         url: "/config/submit.php",
         type: "POST",
         data: {
+            level: 1,
             userID: userID,
             correct: correct,
             dolphin: 0,

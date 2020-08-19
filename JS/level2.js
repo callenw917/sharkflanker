@@ -13,6 +13,7 @@ var rightButton;
     4 0 5
     6 7 8
 */
+var numRounds = 10;
 var seeds = [
     "1111111113",
     "0000000018",
@@ -36,6 +37,7 @@ var seedCounter = 0;
 
 window.onload = function()
 {
+    console.log($.ajax);
     gridSharks[0] = document.getElementById("shark11");
     gridSharks[1] = document.getElementById("shark00");
     gridSharks[2] = document.getElementById("shark01");
@@ -83,6 +85,8 @@ window.onload = function()
     };
 
     generateLevel(seeds[seedCounter++]);
+
+    userID = $('#userID').val();
 
 }
 
@@ -135,11 +139,20 @@ function correct()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
+    //submitRound(1, timeDiff);
+
     //hide old sharks
     gridSharks.forEach(hide);
 
     //generate new sharks
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= numRounds -1)
+    {
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+    }
+    else
+    {
+        window.location.href = 'feedback.php';
+    }
 }
 
 function incorrect()
@@ -148,11 +161,20 @@ function incorrect()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
+    //submitRound(0, timeDiff);
+
     //hide old sharks
     gridSharks.forEach(hide);
 
     //generate new sharks
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= numRounds -1)
+    {
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+    }
+    else
+    {
+        window.location.href = 'feedback.php';
+    }
 }
 
 function Show_Spotlight()
@@ -163,3 +185,20 @@ function Show_Spotlight()
   //display the sharks after 2 seconds
   setTimeout(()=> {gridSharks.forEach(display)},1000);
 }
+
+// function submitRound(correct, timeDiff)
+// {
+//     $.ajax({
+//         url: "/config/submit.php",
+//         type: "POST",
+//         data: {
+//             level: 2,
+//             userID: userID,
+//             correct: correct,
+//             dolphin: 0,
+//             timing: timeDiff,
+//             round: seedCounter
+//         },
+//         cache:false
+//     });
+// }

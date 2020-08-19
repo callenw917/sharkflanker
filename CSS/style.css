@@ -45,7 +45,7 @@ h1 {
 
 #grid-sharks {
     position: absolute;
-    top: -80;
+    margin-top:100;
     left: 0;
     height: 100%;
     width: 100%;

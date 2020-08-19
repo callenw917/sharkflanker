@@ -2,10 +2,9 @@
 session_start(); 
 error_reporting(E_ALL); ini_set('display_errors', 1);
 $id = $_SESSION['userID'];
+$_SESSION['level'] = 1;
 
 ?>
-
-
 
 <html lang="en">
 <head>
