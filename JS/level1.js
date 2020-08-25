@@ -6,6 +6,8 @@ var sharks = [];
 var leftButton;
 var rightButton;
 
+var emoticon;
+
 var numRounds = 30;
 var seeds = [
     "000",
@@ -45,13 +47,12 @@ var startTime;
 var endTime;
 
 var seedCounter = 0;
+var correctCounter = 0;
 
 var userID
 
 window.onload = function()
 {
-    console.log($.ajax);
-
     verticalSharks[0] = document.getElementById("shark2");
     verticalSharks[1] = document.getElementById("shark0");
     verticalSharks[2] = document.getElementById("shark1");
@@ -80,6 +81,8 @@ window.onload = function()
 
     leftButton = document.getElementById("left-button");
     rightButton = document.getElementById("right-button");
+
+    emoticon = document.getElementById("emote-image");
 
     leftButton.onclick = function()
     {
@@ -118,7 +121,6 @@ var innerDirection;
 
 function generateLevel(seed)
 {
-    console.log(seedCounter);
     orientation = seed.charAt(0);
     outerDirection = seed.charAt(1);
     innerDirection = seed.charAt(2);
@@ -161,6 +163,8 @@ function correct()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
+    correctCounter++;
+
     //hide old sharks
     sharks[orientation].forEach(hide);
 
@@ -176,7 +180,7 @@ function correct()
     }
     else
     {
-        window.location.href = 'feedback.php';
+        showFeedback();
     }
 }
 
@@ -199,7 +203,7 @@ function incorrect()
     }
     else
     {
-        window.location.href = 'feedback.php';
+        showFeedback();
     }
 }
 
@@ -218,4 +222,32 @@ function submitRound(correct, timeDiff)
         },
         cache:false
     });
+}
+
+function showFeedback() {
+    //percentage of correct answers
+    var score = correctCounter / numRounds * 100;
+
+    console.log(score);
+
+    if (score >= 85)
+    {
+        emoticon.style.display = "block";
+    }
+    else if (score >= 70)
+    {
+        emoticon.src = "Images/neutral.png";
+        emoticon.style.display = "block";
+    }
+    else
+    {
+        emoticon.src = "Images/sad.png";
+        emoticon.style.display = "block";
+    }   
+
+    window.setTimeout(function() 
+    { 
+        window.location.href = 'feedback.php';
+    } , 5000); 
+    
 }

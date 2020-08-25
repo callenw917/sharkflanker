@@ -38,5 +38,9 @@ $_SESSION['level'] = 2;
         <input type="text" id="userID" name="userID" value="<?php echo $id;?>">
     </form>
 
+    <div id="emotes">
+        <img id="emote-image" src="Images/smile.png" alt="">
+    </div>
+
 </body>
 </html>

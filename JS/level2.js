@@ -6,6 +6,8 @@ var sharks = [];
 var leftButton;
 var rightButton;
 
+var emoticon;
+
 //seed: 10 digits
 //[0-8] shark positions
 //[9] digit spotlight location
@@ -34,6 +36,7 @@ var startTime;
 var endTime;
 
 var seedCounter = 0;
+var correctCounter = 0;
 
 window.onload = function()
 {
@@ -52,6 +55,8 @@ window.onload = function()
 
     leftButton = document.getElementById("left-button");
     rightButton = document.getElementById("right-button");
+
+    emoticon = document.getElementById("emote-image");
 
     //correct if shark in spotlight_direction = same direction as clicked
     leftButton.onclick = function()
@@ -139,6 +144,8 @@ function correct()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
+    correctCounter++;
+
     //submitRound(1, timeDiff);
 
     //hide old sharks
@@ -151,7 +158,7 @@ function correct()
     }
     else
     {
-        window.location.href = 'feedback.php';
+        showFeedback();
     }
 }
 
@@ -173,7 +180,7 @@ function incorrect()
     }
     else
     {
-        window.location.href = 'feedback.php';
+        showFeedback();
     }
 }
 
@@ -202,3 +209,31 @@ function Show_Spotlight()
 //         cache:false
 //     });
 // }
+
+function showFeedback() {
+    //percentage of correct answers
+    var score = correctCounter / numRounds * 100;
+
+    console.log(score);
+
+    if (score >= 85)
+    {
+        emoticon.style.display = "block";
+    }
+    else if (score >= 70)
+    {
+        emoticon.src = "Images/neutral.png";
+        emoticon.style.display = "block";
+    }
+    else
+    {
+        emoticon.src = "Images/sad.png";
+        emoticon.style.display = "block";
+    }   
+
+    window.setTimeout(function() 
+    { 
+        window.location.href = 'feedback.php';
+    } , 5000); 
+    
+}

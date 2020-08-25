@@ -121,3 +121,17 @@ button {
 #submitRound {
     display: none;
 }
+
+#emotes{
+  position: relative;
+  top: 20%;
+
+  margin: auto;
+  width: 40%;
+}
+
+#emote-image
+{
+  display: none;
+  margin: auto;
+}
