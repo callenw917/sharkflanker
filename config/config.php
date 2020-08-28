@@ -9,7 +9,7 @@ $timezone = date_default_timezone_set("America/Chicago");
 // Local Testing
 //$connection = mysqli_connect("localhost","root","","flanker");
 
-Heroku ClearDB Connection
+//Heroku ClearDB Connection
  $url=parse_url(getenv("CLEARDB_DATABASE_URL"));
 
   $server   = $url["host"];
