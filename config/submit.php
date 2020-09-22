@@ -12,5 +12,7 @@
         $query = mysqli_query($connection, "INSERT INTO LEVEL1 VALUES('$userID','$correct','$dolphin','$timing','$round')");
     if($level == 2)
         $query = mysqli_query($connection, "INSERT INTO LEVEL2 VALUES('$userID','$correct','$dolphin','$timing','$round')");
+    if($level == 3)
+        $query = mysqli_query($connection, "INSERT INTO LEVEL3 VALUES('$userID','$correct','$dolphin','$timing','$round')");
     mysqli_close($connection);
 ?>

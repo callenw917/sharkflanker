@@ -6,6 +6,8 @@ var sharks = [];
 var leftButton;
 var rightButton;
 
+var emoticon;
+
 /*  seed: 19 digits
     [0-8] shark positions
     [9] digit spotlight location
@@ -14,6 +16,8 @@ var rightButton;
     4 0 5
     6 7 8
 */
+
+var numRounds = 10;
 var seeds = [
     "1111111108012210212",
     "0010000002010012012",
@@ -24,13 +28,14 @@ var seeds = [
     "1111101100012012012",
     "1000101008012012012",
     "1100100106012012112",
-    "1101001119012012010"
+    "1101001114012012010"
 ]
 
 var startTime;
 var endTime;
 
 var seedCounter = 0;
+var correctCounter = 0;
 
 window.onload = function()
 {
@@ -48,6 +53,8 @@ window.onload = function()
 
     leftButton = document.getElementById("left-button");
     rightButton = document.getElementById("right-button");
+
+    emoticon = document.getElementById("emote-image");
 
     //correct if shark in spotlight_direction = same direction as clicked
     leftButton.onclick = function()
@@ -80,6 +87,8 @@ window.onload = function()
         }
     };
 
+    userID = $('#userID').val();
+
     generateLevel(seeds[seedCounter++]);
 
 }
@@ -106,8 +115,7 @@ function generateLevel(seed)
     gridSharks.forEach(setDirection);
     gridSharks.forEach(setSizes);
 
-    //Begin timer
-    startTime = new Date();
+    
 }
 
 function display(item, index)
@@ -153,11 +161,22 @@ function correct()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
+    correctCounter++;
+
+    submitRound(1, timeDiff);
+
     //hide old sharks
     gridSharks.forEach(hide);
 
     //generate new sharks
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= numRounds -1)
+    {
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+    }
+    else
+    {
+        showFeedback();
+    }
 }
 
 function incorrect()
@@ -166,11 +185,20 @@ function incorrect()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
+    submitRound(0, timeDiff);
+
     //hide old sharks
     gridSharks.forEach(hide);
 
     //generate new sharks
-    generateLevel(seeds[seedCounter++]);
+    if (seedCounter <= numRounds -1)
+    {
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+    }
+    else
+    {
+        showFeedback();
+    }
 }
 
 function Show_Spotlight()
@@ -180,4 +208,50 @@ function Show_Spotlight()
 
   //display the sharks after 2 seconds
   setTimeout(()=> {gridSharks.forEach(display)},1000);
+  //Begin timer
+  startTime = new Date();
+}
+
+function submitRound(correct, timeDiff)
+{
+    $.ajax({
+        url: "/config/submit.php",
+        type: "POST",
+        data: {
+            level: 3,
+            userID: userID,
+            correct: correct,
+            dolphin: 0,
+            timing: timeDiff,
+            round: seedCounter
+        },
+        cache:false
+    });
+}
+
+function showFeedback() {
+  //percentage of correct answers
+  var score = correctCounter / numRounds * 100;
+
+
+  if (score >= 85)
+  {
+      emoticon.style.display = "block";
+  }
+  else if (score >= 70)
+  {
+      emoticon.src = "Images/neutral.png";
+      emoticon.style.display = "block";
+  }
+  else
+  {
+      emoticon.src = "Images/sad.png";
+      emoticon.style.display = "block";
+  }   
+
+  window.setTimeout(function() 
+  { 
+      window.location.href = 'feedback.php';
+  } , 5000); 
+  
 }

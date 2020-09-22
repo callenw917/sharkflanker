@@ -40,7 +40,6 @@ var correctCounter = 0;
 
 window.onload = function()
 {
-    console.log($.ajax);
     gridSharks[0] = document.getElementById("shark11");
     gridSharks[1] = document.getElementById("shark00");
     gridSharks[2] = document.getElementById("shark01");
@@ -113,9 +112,6 @@ function generateLevel(seed)
 
     //Setting each shark's direction
     gridSharks.forEach(setDirection);
-
-    //Begin timer
-    startTime = new Date();
 }
 
 function display(item, index)
@@ -146,7 +142,7 @@ function correct()
 
     correctCounter++;
 
-    //submitRound(1, timeDiff);
+    submitRound(1, timeDiff);
 
     //hide old sharks
     gridSharks.forEach(hide);
@@ -168,7 +164,7 @@ function incorrect()
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
-    //submitRound(0, timeDiff);
+    submitRound(0, timeDiff);
 
     //hide old sharks
     gridSharks.forEach(hide);
@@ -191,24 +187,26 @@ function Show_Spotlight()
 
   //display the sharks after 2 seconds
   setTimeout(()=> {gridSharks.forEach(display)},1000);
+  //Begin timer
+  startTime = new Date();
 }
 
-// function submitRound(correct, timeDiff)
-// {
-//     $.ajax({
-//         url: "/config/submit.php",
-//         type: "POST",
-//         data: {
-//             level: 2,
-//             userID: userID,
-//             correct: correct,
-//             dolphin: 0,
-//             timing: timeDiff,
-//             round: seedCounter
-//         },
-//         cache:false
-//     });
-// }
+function submitRound(correct, timeDiff)
+{
+    $.ajax({
+        url: "/config/submit.php",
+        type: "POST",
+        data: {
+            level: 2,
+            userID: userID,
+            correct: correct,
+            dolphin: 0,
+            timing: timeDiff,
+            round: seedCounter
+        },
+        cache:false
+    });
+}
 
 function showFeedback() {
     //percentage of correct answers
