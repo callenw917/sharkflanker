@@ -24,7 +24,7 @@
                 <h1 class="form-title">1. How are you feeling?</h1>
                 
                 <label for="happy">
-                    <input type="radio" id="happy" name="mood" value ="happy">
+                    <input type="radio" id="happy" name="mood" value ="happy" required>
                     Happy
                 </label>
                 <label for="sad"> 
@@ -43,7 +43,7 @@
                 <h1 class="form-title">2. How hard was that level?</h1>
 
                 <label for="very_easy">
-                    <input type="radio" id="very_easy" name="difficulty" value="very_easy">
+                    <input type="radio" id="very_easy" name="difficulty" value="very_easy" required>
                     Very Easy
                 </label>
                 <label for="easy"> 

@@ -3,32 +3,34 @@
 var gridSharks = [];
 var sharks = [];
 
+var ready = false;
+
 var leftButton;
 var rightButton;
 
 var emoticon;
 
-/*  seed: 19 digits
-    [0-8] shark positions
-    [9] digit spotlight location
-    [10-18] shark sizes (either 0,1,2,)
-    1 2 3
+//seed: 10 digits
+//[0-8] shark positions
+//  0-left, 1-right, 2-dolphin
+//[9] digit spotlight location
+/*  1 2 3
     4 0 5
     6 7 8
 */
 
 var numRounds = 10;
 var seeds = [
-    "1111111108012210212",
-    "0010000002010012012",
-    "0000000107012012012",
-    "0111111111022012012",
-    "0001000003012212012",
-    "0011110002011012012",
-    "1111101100012012012",
-    "1000101008012012012",
-    "1100100106012012112",
-    "1101001114012012010"
+    "1111111113",
+    "0010000018",
+    "1121111017",
+    "1111011114",
+    "0010000002",
+    "0011110000",
+    "1111101101",
+    "1000101004",
+    "1100100104",
+    "1101001117"
 ]
 
 var startTime;
@@ -36,6 +38,8 @@ var endTime;
 
 var seedCounter = 0;
 var correctCounter = 0;
+
+var dolphin = false;
 
 window.onload = function()
 {
@@ -51,41 +55,100 @@ window.onload = function()
 
     sharks.push(gridSharks);
 
-    leftButton = document.getElementById("left-button");
-    rightButton = document.getElementById("right-button");
+    // leftButton = document.getElementById("left-button");
+    // rightButton = document.getElementById("right-button");
+    // dolphinButton = document.getElementById("dolphin-button");
 
     emoticon = document.getElementById("emote-image");
 
-    //correct if shark in spotlight_direction = same direction as clicked
-    leftButton.onclick = function()
-    {
-        if (spotlight_direction == '0')
-        {
-            correct();
-            document.getElementById("Title").innerHTML = 'correct';
-        }
-        else
-        {
-            incorrect();
-            document.getElementById("Title").innerHTML = 'incorrect';
-        }
+    // correct if shark in spotlight_direction = same direction as clicked
+    // leftButton.onclick = function()
+    // {
+    //     if (spotlight_direction == '0' && dolphin == false)
+    //     {
+    //         correct();
+    //         document.getElementById("Title").innerHTML = 'correct';
+    //     }
+    //     else
+    //     {
+    //         incorrect();
+    //         document.getElementById("Title").innerHTML = 'incorrect';
+    //     }
 
+    // };
+
+    // rightButton.onclick = function()
+    // {
+
+    //     if (spotlight_direction == '1' && dolphin == false)
+    //     {
+    //       document.getElementById("Title").innerHTML = 'correct';
+    //         correct();
+    //     }
+    //     else
+    //     {
+    //       document.getElementById("Title").innerHTML = 'incorrect';
+    //         incorrect();
+    //     }
+    // };
+
+    // dolphinButton.onclick = function()
+    // {
+    //     if (dolphin == true)
+    //     {
+    //         correct();
+    //     }
+    //     else
+    //     {
+    //         incorrect();
+    //     }
+    // };
+
+    document.onkeyup = function(event) {
+        switch(event.keyCode) {
+            case 37:
+                if (ready) {
+                    //Left key pressed
+                    if (spotlight_direction == '0' && dolphin == false)
+                    {
+                        correct();                
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+            case 39:
+                if (ready) {
+                    //Right key pressed
+                    if (spotlight_direction == '1' && dolphin == false)
+                    {
+                        correct();
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+            case 32:
+                if (ready) {
+                    //Space key pressed
+                    if (dolphin == true)
+                    {
+                        correct();
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+        }
     };
 
-    rightButton.onclick = function()
-    {
 
-        if (spotlight_direction == '1')
-        {
-          document.getElementById("Title").innerHTML = 'correct';
-            correct();
-        }
-        else
-        {
-          document.getElementById("Title").innerHTML = 'incorrect';
-            incorrect();
-        }
-    };
 
     userID = $('#userID').val();
 
@@ -94,7 +157,6 @@ window.onload = function()
 }
 
 var shark_directions =[];
-var shark_sizes=[];
 var spotlight_location;
 var spotlight_direction;
 
@@ -102,7 +164,13 @@ function generateLevel(seed)
 {
   for (var i = 0; i < (seed.length)-1; i++) {
     shark_directions[i] = seed.charAt(i);
-    shark_sizes[i] = seed.charAt(i+10);
+    if (seed.charAt(i) == '2')
+        {
+            console.log("Dolphin time");
+            shark_directions[i] = '1';
+            gridSharks[i].src = "Images/dolphin.jpg";
+            dolphin = true;
+        }
   }
     spotlight_location = seed.charAt(9);
     spotlight_direction = seed.charAt(spotlight_location);
@@ -113,9 +181,15 @@ function generateLevel(seed)
 
     //Setting each shark's direction
     gridSharks.forEach(setDirection);
-    gridSharks.forEach(setSizes);
+}
 
-    
+function Show_Spotlight()
+{
+  spot_shark.style.display = "initial";
+  spot_shark.src = "Images/spotlight.png";
+
+  //display the sharks after 2 seconds
+  setTimeout(()=> {gridSharks.forEach(display)},1000);
 }
 
 function display(item, index)
@@ -123,11 +197,22 @@ function display(item, index)
     //change the spotlight to show a shark again
     spot_shark.src = "Images/shark.svg";
     item.style.display = "block";
+    
+    //Begin timer
+    startTime = new Date();
+
+    ready = true;
 }
 
 function hide(item, index)
 {
     item.style.display = "none";
+    console.log(item.src);
+    if (item.src.includes("Images/dolphin.jpg"))
+    {
+        console.log("Changing Image");
+        item.src = "Images/shark.svg";
+    }
 }
 
 function setDirection(item, index)
@@ -138,32 +223,25 @@ function setDirection(item, index)
     }
 }
 
-function setSizes(item, index)
-{
-  var size = shark_sizes[index];
-    if (index != '9')
-    {
-      if(size==0){
-        item.style.width = "8%"
-      }
-      else if(size==1){
-        item.style.width = "12%"
-      }
-      else if(size==2){
-        item.style.width = "34%"
-      }
-    }
-}
-
 function correct()
 {
+    ready = false;
+
     //Get time
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
     correctCounter++;
 
-    submitRound(1, timeDiff);
+    if (dolphin == true)
+    {
+        submitRound(1, 1, timeDiff)
+        dolphin = false;
+    }
+    else
+    {
+        submitRound(1, 0, timeDiff);
+    }
 
     //hide old sharks
     gridSharks.forEach(hide);
@@ -181,11 +259,18 @@ function correct()
 
 function incorrect()
 {
+    ready = false;
+
     //Get time
     endTime = new Date();
     var timeDiff = endTime - startTime;
 
-    submitRound(0, timeDiff);
+    if (dolphin == true)
+    {
+        submitRound(0, 1, timeDiff);
+        dolphin = false;
+    }
+    submitRound(0, 0, timeDiff);
 
     //hide old sharks
     gridSharks.forEach(hide);
@@ -201,18 +286,9 @@ function incorrect()
     }
 }
 
-function Show_Spotlight()
-{
-  spot_shark.style.display = "initial";
-  spot_shark.src = "Images/spotlight.png";
 
-  //display the sharks after 2 seconds
-  setTimeout(()=> {gridSharks.forEach(display)},1000);
-  //Begin timer
-  startTime = new Date();
-}
 
-function submitRound(correct, timeDiff)
+function submitRound(correct, dolphin, timeDiff)
 {
     $.ajax({
         url: "/config/submit.php",
@@ -221,7 +297,7 @@ function submitRound(correct, timeDiff)
             level: 3,
             userID: userID,
             correct: correct,
-            dolphin: 0,
+            dolphin: dolphin,
             timing: timeDiff,
             round: seedCounter
         },

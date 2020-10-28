@@ -1,6 +1,7 @@
 body {
     background-image: url("../Images/underwater.jpg");
-    background-position: center;
+    background-repeat: no-repeat; 
+    background-size:cover;
 
     top:0;
     left:0;
@@ -17,6 +18,7 @@ h1 {
 
     display: none;
 }
+
 
 #horizontal-sharks {
     position: absolute;
@@ -45,9 +47,9 @@ h1 {
 
 #grid-sharks {
     position: absolute;
-    margin-top:100;
+    top: 25%;
     left: 0;
-    height: 100%;
+    height: 75%;
     width: 100%;
 
     align-items: center;
@@ -134,4 +136,15 @@ button {
 {
   display: none;
   margin: auto;
+}
+
+#body-container {
+  margin: auto;
+    width: 350px;
+    background-color: white;
+    border: solid #555555 1px;
+    border-radius: 5px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
 }

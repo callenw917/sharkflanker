@@ -100,6 +100,12 @@ h2 {
   box-shadow: 0 0 5px gray;
 }
 
+#buttons {
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+}
+
 .left {
   background-image: url("Images/left_arrow.jpg");
   background-size: 80% 80%;
@@ -126,3 +132,77 @@ h2 {
 #title {
   top: 10%;
 }
+
+.shark {
+  max-width: 15%;
+  max-height: 15%;
+  margin:10px;
+}
+
+#horizontal-sharks-instr {
+  top: -80px;
+  height: 260px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  display: none;
+}
+
+#horizontal-sharks-instr img {
+  width: 50%;
+}
+
+#vertical-sharks-instr {
+  top: -80px;
+  left: 10%;
+  height: 343px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  display: none;
+}
+
+#vertical-sharks-instr img {
+  height: 100%;
+}
+
+#circled_shark_horizontal {
+  width: 100%;
+}
+
+
+#body-container {
+  top: 10%;
+  margin: auto;
+  width: 80%;
+  height: 60%;
+  background-color: white;
+  border: solid #555555 1px;
+  border-radius: 5px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  padding: 60px;
+}
+
+#instr-img-1 {
+  object-fit: contain;
+  width: 60%;
+  left: 20%;
+  padding-top: 30px;
+  position: absolute;
+}
+
+#keyboard_arrow {
+  display: none;
+  position: absolute;
+  width: 20%;
+  left: 38%;
+  margin-top: -20px;
+}
+

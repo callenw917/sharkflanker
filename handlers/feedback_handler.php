@@ -19,11 +19,11 @@ if(isset($_POST['submit']))
 
         if ($level == 1)
         {
-            header("Location: level2.php");
+            header("Location: instructionsLevel2.html");
         }
         else if ($level == 2)
         {
-            header("Location: level3.php");
+            header("Location: instructionsLevel3.html");
         }
         else
         {

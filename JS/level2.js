@@ -3,6 +3,8 @@
 var gridSharks = [];
 var sharks = [];
 
+var ready = false;
+
 var leftButton;
 var rightButton;
 
@@ -52,39 +54,73 @@ window.onload = function()
 
     sharks.push(gridSharks);
 
-    leftButton = document.getElementById("left-button");
-    rightButton = document.getElementById("right-button");
+    // leftButton = document.getElementById("left-button");
+    // rightButton = document.getElementById("right-button");
 
     emoticon = document.getElementById("emote-image");
 
     //correct if shark in spotlight_direction = same direction as clicked
-    leftButton.onclick = function()
-    {
-        if (spotlight_direction == '0')
-        {
-            correct();
-            document.getElementById("Title").innerHTML = 'correct';
-        }
-        else
-        {
-            incorrect();
-            document.getElementById("Title").innerHTML = 'incorrect';
-        }
+    // leftButton.onclick = function()
+    // {
+    //     if (spotlight_direction == '0')
+    //     {
+    //         correct();
+    //         document.getElementById("Title").innerHTML = 'correct';
+    //     }
+    //     else
+    //     {
+    //         incorrect();
+    //         document.getElementById("Title").innerHTML = 'incorrect';
+    //     }
 
-    };
+    // };
 
-    rightButton.onclick = function()
-    {
+    // rightButton.onclick = function()
+    // {
 
-        if (spotlight_direction == '1')
-        {
-          document.getElementById("Title").innerHTML = 'correct';
-            correct();
-        }
-        else
-        {
-          document.getElementById("Title").innerHTML = 'incorrect';
-            incorrect();
+    //     if (spotlight_direction == '1')
+    //     {
+    //       document.getElementById("Title").innerHTML = 'correct';
+    //         correct();
+    //     }
+    //     else
+    //     {
+    //       document.getElementById("Title").innerHTML = 'incorrect';
+    //         incorrect();
+    //     }
+    // };
+
+    document.onkeyup = function(event) {
+        switch(event.keyCode) {
+            case 37:
+                if (ready) {
+                    //Left key pressed
+                    if (spotlight_direction == '0')
+                    {
+                        correct();
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+            case 39:
+                if (ready) {
+                    //Right key pressed
+                    if (spotlight_direction == '1')
+                    {
+                        correct();
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+            case 32:
+                //Space key pressed
+                break;
         }
     };
 
@@ -114,11 +150,24 @@ function generateLevel(seed)
     gridSharks.forEach(setDirection);
 }
 
+function Show_Spotlight()
+{
+  spot_shark.style.display = "initial";
+  spot_shark.src = "Images/spotlight.png";
+
+  //display the sharks after 2 seconds
+  setTimeout(()=> {gridSharks.forEach(display)},1000);
+}
+
 function display(item, index)
 {
     //change the spotlight to show a shark again
     spot_shark.src = "Images/shark.svg";
     item.style.display = "block";
+
+    //Start timer
+    startTime = new Date();
+    ready = true;
 }
 
 function hide(item, index)
@@ -136,6 +185,8 @@ function setDirection(item, index)
 
 function correct()
 {
+    ready = false;
+
     //Get time
     endTime = new Date();
     var timeDiff = endTime - startTime;
@@ -160,6 +211,8 @@ function correct()
 
 function incorrect()
 {
+    ready = false;
+
     //Get time
     endTime = new Date();
     var timeDiff = endTime - startTime;
@@ -180,16 +233,7 @@ function incorrect()
     }
 }
 
-function Show_Spotlight()
-{
-  spot_shark.style.display = "initial";
-  spot_shark.src = "Images/spotlight.png";
 
-  //display the sharks after 2 seconds
-  setTimeout(()=> {gridSharks.forEach(display)},1000);
-  //Begin timer
-  startTime = new Date();
-}
 
 function submitRound(correct, timeDiff)
 {
@@ -211,8 +255,6 @@ function submitRound(correct, timeDiff)
 function showFeedback() {
     //percentage of correct answers
     var score = correctCounter / numRounds * 100;
-
-    console.log(score);
 
     if (score >= 85)
     {

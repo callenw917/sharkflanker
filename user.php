@@ -22,7 +22,7 @@
         <div class="container" id="user-form-border">
             <h1 id="user-title" class="form-title">Please enter your User ID</h1>
             <form action= "user.php" method="post">
-                <input type="text" id="userID" name="userID">
+                <input type="text" id="userID" name="userID" required>
                 <input type="submit" id="submit" name="submit" value="SUBMIT">
             </form>
         </div>

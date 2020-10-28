@@ -12,13 +12,11 @@ $_SESSION['level'] = 1;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="CSS/style.css">
-    <script src="JS/level1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="JS/level1.js"></script>
 </head>
 
 <body>
-    <h1>Level 1</h1>
-    <h3>Which way is the middle shark facing?</h3>
 
     <diV id="shark-container">
         <div id="horizontal-sharks">
@@ -54,10 +52,8 @@ $_SESSION['level'] = 1;
         </div>
     </div>
 
-    <div id="buttons">
-        <button id="left-button" type="button"><</button>
-        <button id="right-button" type="button">></button>
-    </div>
+    <!--Inserting the button panel template-->
+    <!-- <php include 'panel_template.php'; ?> -->
 
     <form method="post" id="submitRound">
         <input type="text" id="userID" name="userID" value="<?php echo $id;?>">

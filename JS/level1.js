@@ -6,6 +6,8 @@ var sharks = [];
 var leftButton;
 var rightButton;
 
+var ready = false;
+
 var emoticon;
 
 var numRounds = 30;
@@ -78,34 +80,68 @@ window.onload = function()
     sharks.push(verticalSharks);
     sharks.push(horizontalSharks);
     sharks.push(gridSharks);
-
-    leftButton = document.getElementById("left-button");
-    rightButton = document.getElementById("right-button");
+    // leftButton = document.getElementById("left-button");
+    // rightButton = document.getElementById("right-button");
 
     emoticon = document.getElementById("emote-image");
 
-    leftButton.onclick = function()
-    {
-        if (innerDirection == '0')
-        {
-            correct();
-        }
-        else
-        {
-            incorrect();
-        }
+    // ONLY FOR TABLET SUPPORT
+    // leftButton.onclick = function()
+    // {
+    //     if (innerDirection == '0')
+    //     {
+    //         correct();
+    //     }
+    //     else
+    //     {
+    //         incorrect();
+    //     }
 
-    };
+    // };
 
-    rightButton.onclick = function()
-    {
-        if (innerDirection == '1')
-        {
-            correct();
-        }
-        else
-        {
-            incorrect();
+    // rightButton.onclick = function()
+    // {
+    //     if (innerDirection == '1')
+    //     {
+    //         correct();
+    //     }
+    //     else
+    //     {
+    //         incorrect();
+    //     }
+    // };
+
+    document.onkeyup = function(event) {
+        switch(event.keyCode) {
+            case 37:
+                if (ready) {
+                    //Left key pressed
+                    if (innerDirection == '0')
+                    {
+                        correct();
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+            case 39:
+                //Right key pressed
+                if (ready) {
+                    if (innerDirection == '1')
+                    {
+                        correct();
+                    }
+                    else
+                    {
+                        incorrect();
+                    }
+                }
+                break;
+            case 32:
+                //Space key pressed
+                break;
         }
     };
 
@@ -127,7 +163,6 @@ function generateLevel(seed)
     
     //Making the sharks visible
     sharks[orientation].forEach(display);
-
     //Setting outer sharks' directions
     sharks[orientation].forEach(setOuterDirection);
 
@@ -137,6 +172,7 @@ function generateLevel(seed)
 
     //Begin timer
     startTime = new Date();
+    ready = true;
 }
 
 function display(item, index)
@@ -153,12 +189,14 @@ function setOuterDirection(item, index)
 {
     if (index != '0')
     {
-        item.style.transform = "scaleX(" + ((-2 * outerDirection) + 1) + ")"
+        item.style.transform = "scaleX(" + ((-2 * outerDirection) + 1) + ")";
     }
 }
 
 function correct()
 {
+    ready = false;
+
     //Get time
     endTime = new Date();
     var timeDiff = endTime - startTime;
@@ -186,6 +224,8 @@ function correct()
 
 function incorrect()
 {   
+    ready = false;
+
     //Get time
     endTime = new Date();
     var timeDiff = endTime - startTime;

@@ -1,4 +1,4 @@
-<!-- contains template for button panel (arrow + dolphin buttons)-->
+<!-- instructions page-->
 
 <!doctype html>
 <html lang="en">
@@ -7,25 +7,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="background.css">
   <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+  <script src="main.js"></script>
 </head>
 
 <body>
-  <template id="button_panel_template">
-    <div class="button_panel">
-      <button onlick="Right_Clicked" type="submit" class="left circlebutton" name="left_arr_button"> </button>
-      <button onclick="Dolphin_Clicked" type="submit" class="dolphin-button circlebutton" name="left_arr_button"> </button>
-      <button onclick="Left_Clicked" type="submit" class="right circlebutton" name="left_arr_button"> </button>
+
+<!--button panel with right left arrows and dolphin button - to be used later-->
+<div id="body-container" class="container">
+  <!--Title and context for game-->
+
+  <h1 id="title">Level 3</h1>
+  <h3 id="top_instr_text">For the last level, you will still look for the spotlight.</h2>
+  <h3 id="bot_instr_text">Now there will be a way to get <b>bonus points</b></h2>
+  <img id="instr-img-1" src="Images/shark_with_dolphin_instr.svg" alt="">
+
+
+  <!--Buttons: go to next page, listen to audio instructions again-->
+    <div  id="buttons">
+      <button onclick = "Lisen_Again(); this.blur();" type="submit" class="btn btn-primary btn-lg pretty_button right-buffer" width="80" name="audio_button"> listen again</button>
+      <button  id="next-page" onclick="Change_Page(); this.blur();" class="btn btn-primary btn-lg pretty_button right-buffer" width="80" name="next_button"> next page</button>
     </div>
-  </template>
+</div>
+
+  
+
+<!--Possibly get the Button Panel from external template-->
+  <!--<?php include("button_panel.php");?> -->
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  <script src="InstrLevel1.js"></script>
+  <script src="InstrLevel3.js"></script>
 </body>
 
 </html>

@@ -18,8 +18,6 @@ $_SESSION['level'] = 2;
 </head>
 
 <body>
-    <h1 id="Title">Level 2</h1>
-    <h3>Which way is the special shark facing?</h3>
             <img src="Images/shark.svg" class="shark row1 col1 absolute" id="shark00">
             <img src="Images/shark.svg" class="shark row1 col2 absolute" id="shark01">
             <img src="Images/shark.svg" class="shark row1 col3 absolute" id="shark02">
@@ -32,7 +30,7 @@ $_SESSION['level'] = 2;
             <img src="Images/shark.svg" class="shark row3 col2 absolute" id="shark21">
             <img src="Images/shark.svg" class="shark row3 col3 absolute" id="shark22">
     <!--Inserting the button panel template-->
-    <?php include 'panel_template.php'; ?>
+    <!-- <php include 'panel_template.php'; ?> -->
 
     <form method="post" id="submitRound">
         <input type="text" id="userID" name="userID" value="<?php echo $id;?>">
