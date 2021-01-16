@@ -15,7 +15,7 @@ $timezone = date_default_timezone_set("America/Chicago");
    $server   = $url["host"];
    $username = $url["user"];
    $password = $url["pass"];
-/  $db       = substr($url["path"],1);
+   $db       = substr($url["path"],1);
    $host     = "mysql:host=$server;dbname=$db";
    $connection = mysqli_connect($server , $username, $password, $db);
 
