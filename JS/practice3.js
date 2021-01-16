@@ -8,7 +8,9 @@ var ready = false;
 var leftButton;
 var rightButton;
 
-var emoticon;
+var containerCorrect;
+var containerIncorrect;
+var debrief_window;
 
 //seed: 10 digits
 //[0-8] shark positions
@@ -19,22 +21,14 @@ var emoticon;
     6 7 8
 */
 
-var numRounds = 10;
+var numRounds = 5;
 var seeds = [
     "1111111113",
     "0010000018",
     "1121111017",
     "1111011114",
     "0010000002",
-    "0011110000",
-    "1111101101",
-    "1000101004",
-    "1100100104",
-    "1101001117"
-]
-
-var startTime;
-var endTime;
+];
 
 var seedCounter = 0;
 var correctCounter = 0;
@@ -59,8 +53,11 @@ window.onload = function()
     // rightButton = document.getElementById("right-button");
     // dolphinButton = document.getElementById("dolphin-button");
 
-    emoticon = document.getElementById("emote-image");
+    containerCorrect   = document.getElementById("correctContainer");
+    containerIncorrect = document.getElementById("incorrectContainer");
+    debrief_window     = document.getElementById("body-container");
 
+    // ONLY FOR TABLET SUPPORT - MAY BE ADDED LATER
     // correct if shark in spotlight_direction = same direction as clicked
     // leftButton.onclick = function()
     // {
@@ -148,11 +145,8 @@ window.onload = function()
         }
     };
 
-
-
-    userID = $('#userID').val();
-
-    GazeCloudAPI.StartEyeTracking();
+    if (seedCounter <= numRounds -1)
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);
 
 }
 
@@ -162,16 +156,18 @@ var spotlight_direction;
 
 function generateLevel(seed)
 {
-  for (var i = 0; i < (seed.length)-1; i++) {
-    shark_directions[i] = seed.charAt(i);
-    if (seed.charAt(i) == '2')
-        {
-            console.log("Dolphin time");
-            shark_directions[i] = '1';
-            gridSharks[i].src = "Images/dolphin.jpg";
-            dolphin = true;
-        }
-  }
+    containerCorrect.style.display = "none";
+    containerIncorrect.style.display = "none";
+    for (var i = 0; i < (seed.length)-1; i++) {
+        shark_directions[i] = seed.charAt(i);
+        if (seed.charAt(i) == '2')
+            {
+                console.log("Dolphin time");
+                shark_directions[i] = '1';
+                gridSharks[i].src = "Images/dolphin.jpg";
+                dolphin = true;
+            }
+    }
     spotlight_location = seed.charAt(9);
     spotlight_direction = seed.charAt(spotlight_location);
     spot_shark = gridSharks[spotlight_location]
@@ -227,33 +223,24 @@ function correct()
 {
     ready = false;
 
-    //Get time
-    endTime = new Date();
-    var timeDiff = endTime - startTime;
-
-    correctCounter++;
-
     if (dolphin == true)
     {
-        submitRound(1, 1, timeDiff)
         dolphin = false;
-    }
-    else
-    {
-        submitRound(1, 0, timeDiff);
     }
 
     //hide old sharks
     gridSharks.forEach(hide);
 
+    containerCorrect.style.display = "block";
+
     //generate new sharks
     if (seedCounter <= numRounds -1)
     {
-        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);  
     }
     else
     {
-        showFeedback();
+        debrief_window.style.display = "block";
     }
 }
 
@@ -261,107 +248,32 @@ function incorrect()
 {
     ready = false;
 
-    //Get time
-    endTime = new Date();
-    var timeDiff = endTime - startTime;
-
     if (dolphin == true)
     {
-        submitRound(0, 1, timeDiff);
         dolphin = false;
     }
-    submitRound(0, 0, timeDiff);
 
     //hide old sharks
     gridSharks.forEach(hide);
 
+    containerIncorrect.style.display = "block";
+
     //generate new sharks
     if (seedCounter <= numRounds -1)
     {
-        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);  
     }
     else
     {
-        showFeedback();
+        debrief_window.style.display = "block";
     }
 }
-
-
-
-function submitRound(correct, dolphin, timeDiff)
+function Listen_Again()
 {
-    $.ajax({
-        url: "/config/submit.php",
-        type: "POST",
-        data: {
-            level: 3,
-            userID: userID,
-            correct: correct,
-            dolphin: dolphin,
-            timing: timeDiff,
-            round: seedCounter
-        },
-        cache:false
-    });
+    console.log("replaying sound");
 }
 
-function showFeedback() {
-  //percentage of correct answers
-  var score = correctCounter / numRounds * 100;
-
-
-  if (score >= 85)
-  {
-      emoticon.style.display = "block";
-  }
-  else if (score >= 70)
-  {
-      emoticon.src = "Images/neutral.png";
-      emoticon.style.display = "block";
-  }
-  else
-  {
-      emoticon.src = "Images/sad.png";
-      emoticon.style.display = "block";
-  }   
-
-  window.setTimeout(function() 
-  { 
-      window.location.href = 'feedback.php';
-  } , 5000); 
-  
-}
-
-
-// Eye tracking code
-
-function PlotGaze(GazeData) 
+function Change_Page()
 {
-    console.log(GazeData.GazeX);
-
-    // Save all data to db, or save aggregate data? m
+    window.location.href = 'level3.php';
 }
-
-
-// Call PlotGaze every time XY is recorded
-GazeCloudAPI.OnResult = PlotGaze;
-
-GazeCloudAPI.OnCalibrationComplete = function()
-{
-    console.log('gaze Calibration Complete')
-    //Generate first level once calibration is done
-    if (seedCounter <= numRounds -1)
-        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);
-}
-
-GazeCloudAPI.OnCamDenied = function()
-{ 
-    console.log('camera access denied')  
-}
-
-GazeCloudAPI.OnError = function(msg)
-{ 
-    console.log('err: ' + msg) 
-}
-
-GazeCloudAPI.UseClickRecalibration = true;

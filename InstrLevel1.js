@@ -4,6 +4,8 @@ $(document).ready(function() {
 
 var page = 1;
 
+GazeCloudAPI.StartEyeTracking();
+
 function Change_Page() {
   page++;
   if (page == 2) {
@@ -16,20 +18,6 @@ function Change_Page() {
     Page_5();
   } else if (page == 6) {
     Page_6();
-  }
-}
-
-function Listen_Again() {
-  if (page == 2) {
-    Listen_Pg2();
-  } else if (page == 3) {
-    Listen_Pg3();
-  }else if (page==4) {
-    Listen_Pg4();
-  }else if (page==5) {
-    Listen_Pg5();
-  }else if (page == 6) {
-    Listen_Pg6();
   }
 }
 
@@ -81,12 +69,11 @@ function Page_5() {
 }
 
 function Page_6() {
-  document.getElementById("top_instr_text").innerHTML = 'Now you are ready to play! Good luck and remember to keep your eyes on the <b>middle shark</b>';
+  document.getElementById("top_instr_text").innerHTML = 'Now, you will get a chance to practice. Take your time, and remember to look at the <b>middle shark</b>.';
   document.getElementById("bot_instr_text").innerHTML = '';
-
   document.getElementById("vertical-sharks-instr").style.display = 'none';
 
   document.getElementById("next-page").onclick = function() {
-    window.location.href = 'level1.php';
+    window.location.href = 'practice1.php';
   };
 }

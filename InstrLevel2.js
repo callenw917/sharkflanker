@@ -68,14 +68,13 @@ function Page_4() {
 }
 
 function Page_5() {
-  document.getElementById("top_instr_text").innerHTML = 'Now you are ready for level 2!';
+  document.getElementById("top_instr_text").innerHTML = 'Now, you will get a chance to practice again. Take your time, and remember to look for the <b>spotlight</b> and press which direction the shark is facing!';
   document.getElementById("bot_instr_text").innerHTML = '';
-
-  //Show buttons
   document.getElementById("next-page").style.display = "inline-block";
-  //all images dissapear
+  document.getElementById("instr-img-1").style.display = "none";
+
   document.getElementById("next-page").onclick = function() {
-    window.location.href = 'level2.php';
+    window.location.href = 'practice2.php';
   };
 }
 

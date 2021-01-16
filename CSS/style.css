@@ -1,76 +1,75 @@
 body {
-    background-image: url("../Images/underwater.jpg");
-    background-repeat: no-repeat; 
-    background-size:cover;
+  background-image: url("../Images/underwater.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
-    top:0;
-    left:0;
+  top: 0;
+  left: 0;
 }
 
 h1 {
-    color: red;
+  color: red;
 }
 
 .shark {
-    max-width: 15%;
-    max-height: 15%;
-    margin:10px;
+  max-width: 15%;
+  max-height: 15%;
+  margin: 10px;
 
-    display: none;
+  display: none;
 }
 
-
 #horizontal-sharks {
-    position: absolute;
-    top: -80;
-    left: 0;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  top: -80;
+  left: 0;
+  height: 100%;
+  width: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #vertical-sharks {
-    position: absolute;
-    top: -80;
-    left: 0;
-    height: 100%;
-    width: 100%;
+  position: absolute;
+  top: -80;
+  left: 0;
+  height: 100%;
+  width: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #grid-sharks {
-    position: absolute;
-    top: 25%;
-    left: 0;
-    height: 75%;
-    width: 100%;
+  position: absolute;
+  top: 25%;
+  left: 0;
+  height: 75%;
+  width: 100%;
 
-    align-items: center;
-    align-content: center;
+  align-items: center;
+  align-content: center;
 }
 
-#row1-container{
+#row1-container {
   flex-wrap: wrap;
 }
 
-#row2-container{
+#row2-container {
   flex-wrap: nowrap;
 }
 
-#row3-container{
+#row3-container {
   flex-wrap: nowrap;
 }
 
 .row {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 /*15% between each column*/
@@ -98,33 +97,32 @@ h1 {
   left: 58%;
 }
 
-.absolute{
+.absolute {
   position: absolute;
 }
 
-#buttons {
-    position: absolute;
-    bottom: 5%;
-    width: 40%;
-    left: 30%;
+/* #buttons {
+  position: absolute;
+  bottom: 5%;
+  width: 40%;
+  left: 30%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+} */
 
 button {
-    margin: 10px;
-    width: 100px;
-    height: 100px;
+  margin: 5px;
+  width: 140px;
 }
 
 #submitRound {
-    display: none;
+  display: none;
 }
 
-#emotes{
+#emotes {
   position: relative;
   top: 20%;
 
@@ -132,19 +130,46 @@ button {
   width: 40%;
 }
 
-#emote-image
-{
+#emote-image {
   display: none;
   margin: auto;
 }
 
 #body-container {
   margin: auto;
-    width: 350px;
-    background-color: white;
-    border: solid #555555 1px;
-    border-radius: 5px;
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    padding: 10px;
+  width: 350px;
+  background-color: white;
+  border: solid #555555 1px;
+  border-radius: 5px;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+}
+
+#correctContainer {
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0%;
+  height: 20%;
+  text-align: center;
+  top: 40%;
+  font-family: "Roboto", sans-serif;
+  font-size: 50px;
+}
+
+#incorrectContainer {
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0%;
+  height: 20%;
+  text-align: center;
+  top: 40%;
+  font-family: "Roboto", sans-serif;
+  font-size: 50px;
+}
+
+.debrief {
+  display: none;
 }

@@ -1,28 +1,25 @@
-<?php
-session_start(); 
-error_reporting(E_ALL); ini_set('display_errors', 1);
-$id = $_SESSION['userID'];
-$_SESSION['level'] = 1;
-
-?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <!-- API for GazeCloud eyetracking -->
-    <script src="https://api.gazerecorder.com/GazeCloudAPI.js" ></script>
-    
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="background.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="JS/level1.js"></script>
-    
+    <script src="JS/practice1.js"></script>
 </head>
 
 <body>
-
+    <div id="correctContainer">
+        <p>Correct!</p>
+        <img src="" alt="">
+    </div>
+    <div id="incorrectContainer">
+        <p>Incorrect</p>
+        <img src="" alt="">
+    </div>
     <diV id="shark-container">
         <div id="horizontal-sharks">
             <img src="Images/shark.svg" class="shark" id="shark0">
@@ -56,16 +53,15 @@ $_SESSION['level'] = 1;
             </div>
         </div>
     </div>
+    <div id="body-container" class="container debrief">
+        <!--Title and context for game-->
+        <h1 id="title">Ready For Level 1?</h1>
+        <h2 id="top_instr_text"> You have finished the practice! Good Job! Now it is time for the real game! Try and finish each round quickly, but it's very important to press the correct arrow key. Keep playing until the end! Before the level begins, we will do a quick test to see how well you're paying attention. Look at every red dot and try to do it without moving your head at all. Don't look away! Press <b>Start</b> when you're ready!</h2>
 
-    <!--Inserting the button panel template-->
-    <!-- <php include 'panel_template.php'; ?> -->
-
-    <form method="post" id="submitRound">
-        <input type="text" id="userID" name="userID" value="<?php echo $id;?>">
-    </form>
-
-    <div id="emotes">
-        <img id="emote-image" src="Images/smile.png" alt="">
+        <!--Buttons: go to next page, listen to audio instructions again-->
+        <div id="buttons">
+        <button  id="next-page"    onclick = "Change_Page();  this.blur();" class="btn btn-primary btn-lg pretty_button right-buffer" width="80" name="next_button"> Start</button>
+        </div>
     </div>
 
 </body>

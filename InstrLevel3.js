@@ -62,11 +62,10 @@ function Page_3() {
 }
 
 function Page_4() {
-  document.getElementById("top_instr_text").innerHTML = 'Now you are ready for level 3!';
+  document.getElementById("top_instr_text").innerHTML = 'Now, you will get a chance to practice. Take your time, and keep an eye out for any dolphins!';
   document.getElementById("bot_instr_text").innerHTML = '';
 
-  //all images dissapear
   document.getElementById("next-page").onclick = function() {
-    window.location.href = 'level3.php';
+    window.location.href = 'practice3.php';
   };
 }

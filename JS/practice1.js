@@ -1,3 +1,5 @@
+//5 practice levels same as level 1, but with feedback and corrections.
+
 var verticalSharks = [];
 var horizontalSharks = [];
 var gridSharks = [];
@@ -8,50 +10,27 @@ var rightButton;
 
 var ready = false;
 
-var emoticon;
+var containerCorrect;
+var containerIncorrect;
+var debrief_window;
 
-var numRounds = 30;
+var numRounds = 9;
 var seeds = [
     "000",
     "010",
     "001",
-    "010",
-    "011",
-    "000",
-    "010",
-    "001",
-    "000",
-    "010",
     "100",
     "110",
     "101",
-    "110",
-    "111",
-    "100",
-    "110",
-    "101",
-    "100",
-    "110",
     "200",
     "210",
-    "201",
-    "210",
-    "211",
-    "200",
-    "210",
-    "201",
-    "200",
-    "210",
-    
+    "201"
 ]
-
-var startTime;
-var endTime;
 
 var seedCounter = 0;
 var correctCounter = 0;
 
-var userID
+var userID;
 
 window.onload = function()
 {
@@ -83,7 +62,9 @@ window.onload = function()
     // leftButton = document.getElementById("left-button");
     // rightButton = document.getElementById("right-button");
 
-    emoticon = document.getElementById("emote-image");
+    containerCorrect   = document.getElementById("correctContainer");
+    containerIncorrect = document.getElementById("incorrectContainer");
+    debrief_window     = document.getElementById("body-container");
 
     // ONLY FOR TABLET SUPPORT - MAY BE ADDED LATER
     // leftButton.onclick = function()
@@ -146,9 +127,10 @@ window.onload = function()
         }
     };
 
-    userID = $('#userID').val();
+    //Generate new levels
+    if (seedCounter <= numRounds -1)
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);
 
-    GazeCloudAPI.StartEyeTracking();
 }
 
 var orientation;
@@ -157,6 +139,8 @@ var innerDirection;
 
 function generateLevel(seed)
 {
+    containerCorrect.style.display = "none";
+    containerIncorrect.style.display = "none";
     orientation = seed.charAt(0);
     outerDirection = seed.charAt(1);
     innerDirection = seed.charAt(2);
@@ -170,8 +154,6 @@ function generateLevel(seed)
     //Use the +1 so scaleX is never 0
     sharks[orientation][0].style.transform = "scaleX(" + ((-2 * innerDirection) + 1) + ")"
 
-    //Begin timer
-    startTime = new Date();
     ready = true;
 }
 
@@ -197,28 +179,21 @@ function correct()
 {
     ready = false;
 
-    //Get time
-    endTime = new Date();
-    var timeDiff = endTime - startTime;
-
-    correctCounter++;
-
     //hide old sharks
     sharks[orientation].forEach(hide);
 
-    //Submit Data
-    submitRound(1, timeDiff);
 
-
+    //TODO show feedback
+    containerCorrect.style.display = "block";
 
     //generate new sharks
     if (seedCounter <= numRounds - 1)
     {
-        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);
     }
     else
     {
-        showFeedback();
+        debrief_window.style.display = "block";
     }
 }
 
@@ -226,103 +201,43 @@ function incorrect()
 {   
     ready = false;
 
-    //Get time
-    endTime = new Date();
-    var timeDiff = endTime - startTime;
-
     //hide old sharks
     sharks[orientation].forEach(hide);
 
-    //Submit Data
-    submitRound(0, timeDiff);
+
+    //TDOO SHOW FEEDBACK
+    containerIncorrect.style.display = "block";
 
     //generate new sharks
     if (seedCounter <= numRounds -1)
     {
-        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 1000);  
+        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);  
     }
     else
     {
-        showFeedback();
+        debrief_window.style.display = "block";
     }
 }
 
-function submitRound(correct, timeDiff)
+function Listen_Again()
 {
-    $.ajax({
-        url: "/config/submit.php",
-        type: "POST",
-        data: {
-            level: 1,
-            userID: userID,
-            correct: correct,
-            dolphin: 0,
-            timing: timeDiff,
-            round: seedCounter
-        },
-        cache:false
-    });
+    console.log("replaying sound");
 }
 
-function showFeedback() {
-    //percentage of correct answers
-    var score = correctCounter / numRounds * 100;
+function Change_Page()
+{
+    window.location.href = 'level1.php';
+}
 
-    console.log(score);
+// function showFeedback() {
+//     //percentage of correct answers
+//     var score = correctCounter / numRounds * 100;
 
-    if (score >= 85)
-    {
-        emoticon.style.display = "block";
-    }
-    else if (score >= 70)
-    {
-        emoticon.src = "Images/neutral.png";
-        emoticon.style.display = "block";
-    }
-    else
-    {
-        emoticon.src = "Images/sad.png";
-        emoticon.style.display = "block";
-    }   
+//     console.log(score);
 
-    window.setTimeout(function() 
-    { 
-        window.location.href = 'feedback.php';
-    } , 5000); 
+//     window.setTimeout(function() 
+//     { 
+//         window.location.href = 'feedback.php';
+//     } , 5000); 
     
-}
-
-
-
-// Eye tracking code
-
-function PlotGaze(GazeData) 
-{
-    console.log(GazeData.GazeX);
-
-    // Save all data to db, or save aggregate data? m
-}
-
-
-// Call PlotGaze every time XY is recorded
-GazeCloudAPI.OnResult = PlotGaze;
-
-GazeCloudAPI.OnCalibrationComplete = function()
-{
-    console.log('gaze Calibration Complete')
-    //Generate first level once calibration is done
-    if (seedCounter <= numRounds -1)
-        window.setTimeout(function() { generateLevel(seeds[seedCounter++]); } , 2000);
-}
-
-GazeCloudAPI.OnCamDenied = function()
-{ 
-    console.log('camera access denied')  
-}
-
-GazeCloudAPI.OnError = function(msg)
-{ 
-    console.log('err: ' + msg) 
-}
-
-GazeCloudAPI.UseClickRecalibration = true;
+// }
