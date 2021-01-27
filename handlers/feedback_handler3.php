@@ -28,7 +28,7 @@ if(isset($_POST['submit']))
         else
         {
             //to be changed when final form is created
-            header("Location: index.html");
+            //header("Location: index.html");
         }
         exit();
     }
