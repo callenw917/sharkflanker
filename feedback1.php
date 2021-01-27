@@ -20,7 +20,7 @@
 <body>
     <div class="container" id="user-form">
         <div class="container" id="user-form-border">
-            <form action= "feedback.php" method="post">
+            <form action= "feedback1.php" method="post">
                 <h1 class="form-title">1. How are you feeling?</h1>
                 
                 <label for="happy">
