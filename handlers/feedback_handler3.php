@@ -25,10 +25,10 @@ if(isset($_POST['submit']))
         {
             header("Location: instructionsLevel3.html");
         }
-        else
+        else if ($level == 3)
         {
             //to be changed when final form is created
-            //header("Location: index.html");
+            header("Location: endPage.html");
         }
         exit();
     }
