@@ -1,6 +1,6 @@
 <?php
     error_reporting(E_ALL); ini_set('display_errors', 1);
-    require $_SERVER['DOCUMENT_ROOT'].'/handlers/feedback_handler.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/handlers/feedback_handler3.php';
     
 ?>
 

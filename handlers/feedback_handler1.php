@@ -7,7 +7,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/config/config.php';
 $userID = "";
 $mood = "";
 $difficulty = "";
-$level = $_SESSION['level'];
+$level = 1;
 
 if(isset($_POST['submit'])) 
     {

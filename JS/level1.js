@@ -287,7 +287,7 @@ function showFeedback() {
 
     window.setTimeout(function() 
     { 
-        window.location.href = 'feedback.php';
+        window.location.href = 'feedback1.php';
     } , 5000); 
     
 }

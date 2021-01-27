@@ -273,7 +273,7 @@ function showFeedback() {
 
     window.setTimeout(function() 
     { 
-        window.location.href = 'feedback.php';
+        window.location.href = 'feedback2.php';
     } , 5000); 
     
 }
